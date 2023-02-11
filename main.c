@@ -99,6 +99,27 @@ void zerarMontantes(c_cliente* c)
 	}
 }
 
+void melhorComprador(c_cliente* c)
+{
+	printf("...Melhor Comprador...\n");
+	char n[30];
+	int ano = 0;
+	double mon = 0;
+	strcpy(n, (c + 0)->nome);
+	ano = (c + 0)->anoNascimento;
+	mon = (c + 0)->montante;
+	for(int i = 1; i < 10; i++)
+	{
+		if((c + i)->montante > mon)
+		{
+			strcpy(n, (c + i)->nome);
+			ano = (c + i)->anoNascimento;
+			mon = (c + i)->montante;
+		}
+	}
+	printf("Nome do Melhor comprador %s com ano de nascimento %d no valor de montante de R$%.2lf\n", n, ano, mon);
+}
+
 
 void menu()
 {
@@ -160,6 +181,9 @@ int main()
                 break;
             case 4:
                 zerarMontantes(&cliente[0]);
+                break;
+            case 5:
+                melhorComprador(&cliente[0]);
                 break;
 
         }
