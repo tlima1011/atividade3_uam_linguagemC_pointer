@@ -52,14 +52,33 @@ void listarCliente(c_cliente* c)
 {
 	for(int i = 0; i < 10; i++)
 	{
-		/*if((c + i)-> montante != 0.0)
-		{*/
+		if(((c + i)-> nome != "") || ((c + i)-> nome !="-"))
+		{
 			printf("===================================\n");
 			printf("Dados do %d cliente \n", i + 1);
 			printf("===================================\n");
 			printf("Nome: %s \n", (c+i)-> nome) ;
 			printf("Ano Nascimento: %d\n", (c + i)->anoNascimento);
 			printf("Montante em R$%.2lf\n", (c + i)->montante);
+        }
+	}
+}
+
+void removerCliente(c_cliente* c)
+{
+	char procurar[30];
+	//char procurar[30];
+	limpar_entrada();
+	printf("Informe um nome para remover: " );
+	scanf("%s", &procurar);
+	for(int i = 0; i < 10; i++)
+	{
+		if(!strcmp(procurar, (c + i)-> nome))
+		{
+			strcpy((c + i)->nome, "-");
+			(c + i)->anoNascimento = 0;
+			(c + i)->montante = 0;
+		}
 	}
 }
 
@@ -136,10 +155,12 @@ int main()
             case 2:
                 listarCliente(&cliente[0]);
                 break;
+            case 3:
+                removerCliente(&cliente[0]);
+                break;
             case 4:
                 zerarMontantes(&cliente[0]);
                 break;
-
 
         }
     }while(opcao != 7);
