@@ -10,6 +10,44 @@ typedef struct{
 
 int opcao = 0;
 
+void limpar_entrada() {
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
+void incluirCliente(c_cliente* c)
+{
+	//system("cls");
+	int i = 0;
+	char cont;
+
+	do
+	{
+		printf("Dados do %dº cliente \n");
+		printf("Nome: " );
+		scanf("%s",  &(c + i)->nome);
+		printf("Ano Nascimento: ");
+		scanf("%d",&(c + i)-> anoNascimento);
+		printf("Montante em Gastos  R$");
+		scanf("%lf",&(c + i)->montante);
+		i++;
+		limpar_entrada();
+		printf("Deseja continuar [S/N] " ) ;
+		scanf("%c", &cont);
+		if((cont == 'n') || (cont == 'N'))
+		{
+			break;
+		}
+		if( i >= 10)
+		{
+			printf("Atingido quantidade máxima de clientes");
+			break;
+		}
+	}
+	while(i < 10 || cont == 'n' || cont == 'N');
+}
+
+
 void menu()
 {
 	printf("+-------------------------------------------+\n");
@@ -56,6 +94,11 @@ int main()
     do{
         system("cls");
         menu();
+        switch(opcao){
+            case 1:
+            incluirCliente(&cliente[0]);
+            break;
+        }
     }while(opcao != 7);
 
 
