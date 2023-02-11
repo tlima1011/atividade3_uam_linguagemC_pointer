@@ -120,6 +120,19 @@ void melhorComprador(c_cliente* c)
 	printf("Nome do Melhor comprador %s com ano de nascimento %d no valor de montante de R$%.2lf\n", n, ano, mon);
 }
 
+void montanteCliente(c_cliente* c){
+	char n[30];
+	double m;
+	printf("Informe um nome para somar:  ");
+	scanf("%s", n);
+	for(int i = 0; i < 10;i++){
+		if(!strcmp(n,(c + i)-> nome))
+		{
+			m += (c + i)->montante;
+		}
+	}
+	printf("Montante do Cliente %.2lf\n", m);
+}
 
 void menu()
 {
@@ -185,7 +198,9 @@ int main()
             case 5:
                 melhorComprador(&cliente[0]);
                 break;
-
+            case 6:
+                montanteCliente(&cliente[0]);
+                break;
         }
     }while(opcao != 7);
 
