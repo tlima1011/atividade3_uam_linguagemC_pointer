@@ -37,6 +37,21 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
+    int i = 0;
+	char cont;
+
+	c_cliente cliente[10];
+	c_cliente* c;
+	c = &cliente[0];
+
+	for(int i = 0; i < 10; i++)
+	{
+		//cout << "Zerando montante do " << i + 1 << " cliente: " << endl;
+		strcpy((c + i)->nome, "");
+		(c + i)->anoNascimento = 0;
+		(c + i)->montante = 0.0;
+	}
+
 
     do{
         system("cls");
