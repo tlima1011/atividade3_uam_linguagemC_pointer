@@ -17,7 +17,7 @@ void limpar_entrada() {
 
 void incluirCliente(c_cliente* c)
 {
-	//system("cls");
+	system("cls");
 	static int i = 0;
 	char cont;
 
@@ -38,6 +38,7 @@ void incluirCliente(c_cliente* c)
 		{
 			break;
 		}
+		system("cls");
 		if( i >= 10)
 		{
 			printf("Atingido quantidade máxima de clientes");
@@ -51,15 +52,31 @@ void listarCliente(c_cliente* c)
 {
 	for(int i = 0; i < 10; i++)
 	{
-		if((c + i)-> montante != 0.0)
-		{
+		/*if((c + i)-> montante != 0.0)
+		{*/
 			printf("===================================\n");
 			printf("Dados do %d cliente \n", i + 1);
 			printf("===================================\n");
 			printf("Nome: %s \n", (c+i)-> nome) ;
 			printf("Ano Nascimento: %d\n", (c + i)->anoNascimento);
 			printf("Montante em R$%.2lf\n", (c + i)->montante);
+	}
+}
+
+void zerarMontantes(c_cliente* c)
+{
+	char zerar;
+	limpar_entrada();
+	printf("Deseja zerar montantes? [s][n] -> ");
+	scanf("%c", &zerar);
+	if(zerar == 'S' || zerar == 's')
+	{
+		for(int i = 0; i < 10; i++)
+		{
+			printf("Zerando montante do %d cliente que eh %s\n", i + i, (c+i)->nome);
+			(c + i)->montante = 0.0;
 		}
+		printf("Montantes zerados com sucesso\n");
 	}
 }
 
@@ -86,6 +103,8 @@ void menu()
 	- listar o cliente melhor comprador
 	- exibir um montante de compras de um cliente específico.*/
 }
+
+
 
 int main()
 {
@@ -117,6 +136,10 @@ int main()
             case 2:
                 listarCliente(&cliente[0]);
                 break;
+            case 4:
+                zerarMontantes(&cliente[0]);
+                break;
+
 
         }
     }while(opcao != 7);
