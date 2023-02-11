@@ -18,12 +18,12 @@ void limpar_entrada() {
 void incluirCliente(c_cliente* c)
 {
 	//system("cls");
-	int i = 0;
+	static int i = 0;
 	char cont;
 
 	do
 	{
-		printf("Dados do %dº cliente \n");
+		printf("Dados do %dº cliente \n", i + 1);
 		printf("Nome: " );
 		scanf("%s",  &(c + i)->nome);
 		printf("Ano Nascimento: ");
@@ -45,6 +45,22 @@ void incluirCliente(c_cliente* c)
 		}
 	}
 	while(i < 10 || cont == 'n' || cont == 'N');
+}
+
+void listarCliente(c_cliente* c)
+{
+	for(int i = 0; i < 10; i++)
+	{
+		if((c + i)-> montante != 0.0)
+		{
+			printf("===================================\n");
+			printf("Dados do %d cliente \n", i + 1);
+			printf("===================================\n");
+			printf("Nome: %s \n", (c+i)-> nome) ;
+			printf("Ano Nascimento: %d\n", (c + i)->anoNascimento);
+			printf("Montante em R$%.2lf\n", (c + i)->montante);
+		}
+	}
 }
 
 
@@ -92,12 +108,16 @@ int main()
 
 
     do{
-        system("cls");
+        //system("cls");
         menu();
         switch(opcao){
             case 1:
-            incluirCliente(&cliente[0]);
-            break;
+                incluirCliente(&cliente[0]);
+                break;
+            case 2:
+                listarCliente(&cliente[0]);
+                break;
+
         }
     }while(opcao != 7);
 
