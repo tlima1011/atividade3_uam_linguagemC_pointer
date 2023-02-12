@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "arquivos.h"
 
 typedef struct{
     char nome[30];
@@ -170,6 +171,9 @@ void operacoes_arquivo(){
     printf("Opcao: ");
     scanf("%c", &op);
     switch(op){
+        case 'g':
+            gravarArquivo(&cliente[0]);
+        break;
         case 'v': case 'x':
             menu();
         break;
