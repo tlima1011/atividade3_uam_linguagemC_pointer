@@ -145,7 +145,8 @@ void menu()
 	printf("| [ 4 ] - Zerar todos montantes \n");
 	printf("| [ 5 ] - Listar o melhor comprador \n");
 	printf("| [ 6 ] - Exibir montante de um cliente específico \n");
-	printf("| [ 7 ] - Sair \n");
+	printf("| [ 7 ] - Operacoes de Arquivo\n");
+	printf("| [ 8 ] - Sair \n");
 	printf("+-------------------------------------------+\n");
 	printf("|Opção ");
 	scanf("%d", &opcao);
@@ -155,6 +156,25 @@ void menu()
 	- zerar todos os montantes de compras por ocasião da virada de mês
 	- listar o cliente melhor comprador
 	- exibir um montante de compras de um cliente específico.*/
+}
+
+void operacoes_arquivo(){
+    char op;
+    system("cls");
+    limpar_entrada();
+    printf("===========================================\n");
+    printf(" [ g ] -> Gravar em arquivo \n");
+    printf(" [ r ] -> Ler em arquivo \n");
+    printf(" [ v ] / [ x ]- Voltar para o Menu anterior\n");
+    printf("===========================================\n");
+    printf("Opcao: ");
+    scanf("%c", &op);
+    switch(op){
+        case 'v': case 'x':
+            menu();
+        break;
+    }
+    system("cls");
 }
 
 
@@ -201,8 +221,11 @@ int main()
             case 6:
                 montanteCliente(&cliente[0]);
                 break;
+            case 7:
+                operacoes_arquivo();
+                break;
         }
-    }while(opcao != 7);
+    }while(opcao != 8);
 
 
     return 0;
