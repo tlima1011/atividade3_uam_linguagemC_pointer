@@ -11,8 +11,8 @@ void gravarArquivo(c_cliente *c){
         printf("Erro na abertura do arquivo\n");
         return 0;
     }
-    for(int i = 0; i < 10;i++){
-         fprintf(arq, "%s;%d;%.2lf", (c+pos)->nome, (c+pos)->anoNascimento, (c+pos)->montante);
+    for(pos = 0; pos < 10;pos++){
+         fprintf(arq, "%s;%d;%.2lf\n", (c+pos)->nome, (c+pos)->anoNascimento, (c+pos)->montante);
     }
     fclose(arq);
 
