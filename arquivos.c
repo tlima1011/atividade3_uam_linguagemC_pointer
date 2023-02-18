@@ -1,9 +1,9 @@
 //typedef struct c_cliente *c;
 #include "main.h"
 
-typedef struct c_cliente *c;
+//typedef struct c_cliente *c;
 
-void gravarArquivo(c_cliente *c){
+void gravarArquivo(c_cliente* c){
     FILE *arq;
     int pos = 0;
     arq = fopen("C:\\Users\\thiag\\Desktop\\TesteArquivo\\cliente.txt","wb");

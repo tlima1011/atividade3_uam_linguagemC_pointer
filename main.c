@@ -9,11 +9,20 @@ typedef struct{
     double montante;
 }c_cliente;
 
-int opcao = 0;
+int opcao = 0, j = 0;
 
 void limpar_entrada() {
     char c;
     while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
+void inicializarPonteiros(c_cliente* c){ 
+	for(j = 0; j < 10; j++)
+	{
+		strcpy((c + j)->nome, "");
+		(c + j)->anoNascimento = 0;
+		(c + j)->montante = 0.0;
+	}
 }
 
 void incluirCliente(c_cliente* c)
@@ -51,16 +60,16 @@ void incluirCliente(c_cliente* c)
 
 void listarCliente(c_cliente* c)
 {
-	for(int i = 0; i < 10; i++)
+	for(j = 0; j < 10; j++)
 	{
-		if(((c + i)-> nome != "") || ((c + i)-> nome !="-"))
+		if(((c + j)-> nome != "") || ((c + j)-> nome !="-"))
 		{
 			printf("===================================\n");
-			printf("Dados do %d cliente \n", i + 1);
+			printf("Dados do %d cliente \n", j + 1);
 			printf("===================================\n");
-			printf("Nome: %s \n", (c+i)-> nome) ;
-			printf("Ano Nascimento: %d\n", (c + i)->anoNascimento);
-			printf("Montante em R$%.2lf\n", (c + i)->montante);
+			printf("Nome: %s \n", (c+j)-> nome) ;
+			printf("Ano Nascimento: %d\n", (c + j)->anoNascimento);
+			printf("Montante em R$%.2lf\n", (c + j)->montante);
         }
 	}
 }
@@ -72,13 +81,14 @@ void removerCliente(c_cliente* c)
 	limpar_entrada();
 	printf("Informe um nome para remover: " );
 	scanf("%s", &procurar);
-	for(int i = 0; i < 10; i++)
+	//int i; 
+	for(j = 0; j < 10; j++)
 	{
-		if(!strcmp(procurar, (c + i)-> nome))
+		if(!strcmp(procurar, (c + j)-> nome))
 		{
-			strcpy((c + i)->nome, "-");
-			(c + i)->anoNascimento = 0;
-			(c + i)->montante = 0;
+			strcpy((c + j)->nome, "-");
+			(c + j)->anoNascimento = 0;
+			(c + j)->montante = 0;
 		}
 	}
 }
@@ -91,10 +101,10 @@ void zerarMontantes(c_cliente* c)
 	scanf("%c", &zerar);
 	if(zerar == 'S' || zerar == 's')
 	{
-		for(int i = 0; i < 10; i++)
+		for(j = 0; j < 10; j++)
 		{
-			printf("Zerando montante do %d cliente que eh %s\n", i + i, (c+i)->nome);
-			(c + i)->montante = 0.0;
+			printf("Zerando montante do %d cliente que eh %s\n", j + 1, (c+j)->nome);
+			(c + j)->montante = 0.0;
 		}
 		printf("Montantes zerados com sucesso\n");
 	}
@@ -109,13 +119,14 @@ void melhorComprador(c_cliente* c)
 	strcpy(n, (c + 0)->nome);
 	ano = (c + 0)->anoNascimento;
 	mon = (c + 0)->montante;
-	for(int i = 1; i < 10; i++)
+	//int i; 
+	for(j = 1; j < 10; j++)
 	{
-		if((c + i)->montante > mon)
+		if((c + j)->montante > mon)
 		{
-			strcpy(n, (c + i)->nome);
-			ano = (c + i)->anoNascimento;
-			mon = (c + i)->montante;
+			strcpy(n, (c + j)->nome);
+			ano = (c + j)->anoNascimento;
+			mon = (c + j)->montante;
 		}
 	}
 	printf("Nome do Melhor comprador %s com ano de nascimento %d no valor de montante de R$%.2lf\n", n, ano, mon);
@@ -126,10 +137,11 @@ void montanteCliente(c_cliente* c){
 	double m;
 	printf("Informe um nome para somar:  ");
 	scanf("%s", n);
-	for(int i = 0; i < 10;i++){
-		if(!strcmp(n,(c + i)-> nome))
+	//int i;
+	for(j = 0; j < 10;j++){
+		if(!strcmp(n,(c + j)-> nome))
 		{
-			m += (c + i)->montante;
+			m += (c + j)->montante;
 		}
 	}
 	printf("Montante do Cliente %.2lf\n", m);
@@ -172,7 +184,7 @@ void operacoes_arquivo(){
     scanf("%c", &op);
     switch(op){
         case 'g':
-            gravarArquivo(&cliente[0]);
+            //gravarArquivo(&cliente[0]);
         break;
         case 'v': case 'x':
             menu();
@@ -193,15 +205,8 @@ int main()
 	c_cliente cliente[10];
 	c_cliente* c;
 	c = &cliente[0];
-
-	for(int i = 0; i < 10; i++)
-	{
-		//cout << "Zerando montante do " << i + 1 << " cliente: " << endl;
-		strcpy((c + i)->nome, "");
-		(c + i)->anoNascimento = 0;
-		(c + i)->montante = 0.0;
-	}
-
+	 
+	inicializarPonteiros(&cliente[0]); 
 
     do{
         //system("cls");
@@ -225,9 +230,9 @@ int main()
             case 6:
                 montanteCliente(&cliente[0]);
                 break;
-            case 7:
+            /*case 7:
                 operacoes_arquivo();
-                break;
+                break;*/
         }
     }while(opcao != 8);
 
